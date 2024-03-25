@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Thasadith|Rokkitt|Reenie+Beanie:300,400,500,700");
+@import url("https://use.fontawesome.com/releases/v5.6.3/css/all.css");
+
+// Variables (Example of how you can use variables in SCSS)
+$background-color: #2b2d41;
+$text-color: #e0e0e0;
+$navigation-background-color: #212336;
+$button-hover-color: #ff4a57;
+$highlight-text-color: #ff4a57;
+$font-stack: "Khand", sans-serif;
+$code-font-family: "Reenie Beanie", cursive;
+$anchor-color: #999;
+
+a {
+  color: $anchor-color;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+    color: white;
+    background-color: $highlight-text-color;
+  }
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+  font-style: normal;
+  background-color: $background-color;
+  color: $text-color;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+* {
+  font-family: $font-stack;
+  padding: 0;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 500;
+  padding: 1rem 0;
+}
+
+h1 {
+  font-size: 5rem;
+  line-height: 5rem;
+}
+
+.App {
+  text-align: left;
+}
+
+.navigation {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  background-color: $navigation-background-color;
+  z-index: 1000;
+  padding: 0;
+
+  button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover, &:focus {
+      background-color: $button-hover-color;
+      outline: none;
+    }
+  }
+}
+
+.section {
+  min-height: 100vh;
+  padding: 60px 20px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  h2 {
+    margin: 0 0 20px;
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+}
+
+code, pre {
+  font-family: $code-font-family;
+}
+
+.code {
+  font-size: 2rem;
+  color: #555;
+}
+
+:root {
+  --tabSize: 0; // Default tab size
+  --flexDisplay: block; // Default flex display
+}
+
+.container {
+  display: var(--flexDisplay);
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+  color: var(--color-white);
+
+  .code {
+    font-size: 25px;
+    color: var(--color-grey);
+    font-weight: 300;
+  }
+
+  a {
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--color-highlight);
+      text-decoration: none;
+    }
+  }
+
+  .section-padding-top {
+    padding-top: 8em;
+
+    &.about-me {
+      paddingTop: 3em;
+      overflow: auto;
+    }
+  }
+
+  input, textarea {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--color-lightText);
+
+    &:focus, &:hover, &:active {
+      box-shadow: none;
+    }
+  }
+
+  .submit-button {
+    background-color: var(--color-highlight);
+    font-weight: 600;
+  }
+}
+
+.tabbed {
+  padding-left: calc(var(--tabSize) * 2em);
+  overflow: auto;
+}
+
+.tabbed-content {
+  padding: 1rem 0;
+  width: 80%;
+  margin: auto;
+  h1 {
+    padding: 0
+  }
+  pre {
+    padding: 1rem 0;
+  }
+}
+
+.highlight-text {
+  color: $highlight-text-color;
+}
