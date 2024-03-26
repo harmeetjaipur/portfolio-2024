@@ -43,7 +43,7 @@ I believe in continuous growth and learning. You can find more about my learning
 
 ## Deployment
 
-This portfolio is deployed using [Netlify](https://netlify.com). For more details on deploying your own projects, see [deployment](https://facebook.github.io/create-react-app/docs/deployment).
+This portfolio is deployed using Github Pages and Google Domains.
 
 ## Customizing and Contributions
 
