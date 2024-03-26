@@ -8,7 +8,9 @@ import {
   SiGraphql,
   SiApollographql,
   SiCss3,
+  SiWebpack,
 } from "react-icons/si";
+import Tabbed from "./tabbed";
 
 const skillsetData = [
   {
@@ -38,7 +40,7 @@ const skillsetData = [
     title: "Node",
     icon: <SiNodedotjs />,
     description:
-      "Building scalable backend services and RESTful APIs with Node.js.",
+      "Maintaining and upgrading scalable services and RESTful APIs with Node.js.",
   },
   {
     title: "GraphQL",
@@ -57,6 +59,12 @@ const skillsetData = [
     icon: <FaPuzzlePiece />,
     description:
       "Implementing frontend apps using the mFE approach to break down monoliths into smaller, more manageable pieces.",
+  },
+  {
+    title: "Webpack",
+    icon: <SiWebpack />,
+    description:
+      "Automating asset bundling and optimization workflows to streamline development and production processes.",
   },
 ];
 
@@ -84,10 +92,15 @@ const SkillTile = styled.div`
   }
 `;
 
+const StyledH1 = styled.h1`
+  text-align: center;
+  margin-bottom: 2rem;
+`;
+
 const Skills: React.FC = () => {
   return (
-    <section id="skills" className="section">
-      <h2 className="highlight-text">Skills</h2>
+    <Tabbed className="tabbed-content" tabSize={1}>
+      <StyledH1 className="highlight-text">Skills</StyledH1>
       <SkillContainer>
         {skillsetData.map((skill) => (
           <SkillTile key={skill.title}>
@@ -97,7 +110,7 @@ const Skills: React.FC = () => {
           </SkillTile>
         ))}
       </SkillContainer>
-    </section>
+    </Tabbed>
   );
 };
 
