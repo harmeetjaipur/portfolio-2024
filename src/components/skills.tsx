@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaReact, FaPuzzlePiece } from "react-icons/fa";
+import { FaReact, FaPuzzlePiece, FaUserFriends } from "react-icons/fa";
 import {
   SiJavascript,
   SiRedux,
@@ -65,6 +65,12 @@ const skillsetData = [
     icon: <SiWebpack />,
     description:
       "Automating asset bundling and optimization workflows to streamline development and production processes.",
+  },
+  {
+    title: "Mentorship",
+    icon: <FaUserFriends />,
+    description:
+      "Guiding and empowering developers through knowledge sharing, code reviews, and personalized advice to enhance team skills and productivity.",
   },
 ];
 
