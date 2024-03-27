@@ -184,3 +184,8 @@ code, pre {
 .highlight-text {
   color: $highlight-text-color;
 }
+
+button.active {
+  background-color: $highlight-text-color;
+  color: #fff;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 //@ts-ignore
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
@@ -34,17 +34,39 @@ const pages = [
   {
     button: () => <button onClick={() => scrollTo("skills")}>Skills</button>,
     component: Skills,
-    title: "Technical Skills Summary",
+    title: "Skills",
     id: "skills",
   },
 ];
 
 const App: React.FC = () => {
-  // this should be run only once per application lifetime
+  // State to track the active section
+  const [activeSection, setActiveSection] = useState<string>("");
+
   useEffect(() => {
     initParticlesEngine(async (engine: any) => {
       await loadSlim(engine);
     });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "0px", threshold: 0.5 }
+    );
+
+    // Observe each section
+    pages.forEach(({ id }) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+
+    // Clean up observer on component unmount
+    return () => observer.disconnect();
   }, []);
 
   const options = useMemo(
@@ -66,17 +88,28 @@ const App: React.FC = () => {
     <div className="App">
       <Particles
         id="tsparticles"
-        //@ts-ignore
+        // @ts-ignore
         options={options}
       />
-      <div className="navigation">{pages.map((page) => page.button())}</div>
+      <div className="navigation">
+        {pages.map((page) => (
+          <button
+            onClick={() => scrollTo(page.id)}
+            className={activeSection === page.id ? "active" : ""}
+            key={page.id}
+          >
+            {page.title}
+          </button>
+        ))}
+      </div>
       {pages.map(({ component: Component, title, id }) => (
         <div
+          key={id}
           style={{ position: "relative", zIndex: 1, width: "100%" }}
           className="section"
           id={id}
         >
-          <Component key={title} />
+          <Component />
         </div>
       ))}
     </div>

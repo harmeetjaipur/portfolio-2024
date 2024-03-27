@@ -35,10 +35,6 @@ const AboutMe: React.FC = () => {
         </h1>
         <h1 className="grey-text">a JavaScript/frontend developer.</h1>
         <pre className="code">&lt;/h1&gt;</pre>
-        <p className="qualifications">
-          React | JavaScript | Redux | Node | GraphQL | Apollo | NextJS |
-          Microfrontend
-        </p>
       </BackgroundDiv>
     </Tabbed>
   );
