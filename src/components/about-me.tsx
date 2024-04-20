@@ -26,8 +26,8 @@ const BackgroundDiv = styled.div`
 
 const AboutMe: React.FC = () => {
   return (
-    <Tabbed className="tabbed-content" tabSize={1}>
-      <BackgroundDiv>
+    <Tabbed className="tabbed-content " tabSize={1}>
+      <BackgroundDiv className="about-me">
         <pre className="code">&lt;h1&gt;</pre>
         <h1>Hello, world!</h1>
         <h1 className="grey-text">

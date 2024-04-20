@@ -11,8 +11,8 @@ const StyledSection = styled.div`
 const Experience: React.FC = () => {
   return (
     <Tabbed className="tabbed-content" tabSize={1}>
-      <StyledSection>
-        <div>
+      <StyledSection className="work-experience">
+        <div className="where-am-i-from">
           <pre className="code">&lt;h1&gt;</pre>
           <h1 className="grey-text">
             <span className="highlight-text">Where am I from?</span>
