@@ -84,6 +84,8 @@ const App: React.FC = () => {
     []
   );
 
+  console.log({ activeSection });
+
   return (
     <div className="App">
       <Particles
@@ -94,7 +96,10 @@ const App: React.FC = () => {
       <div className="navigation">
         {pages.map((page) => (
           <button
-            onClick={() => scrollTo(page.id)}
+            onClick={() => {
+              setActiveSection(page.id);
+              scrollTo(page.id);
+            }}
             className={activeSection === page.id ? "active" : ""}
             key={page.id}
           >
