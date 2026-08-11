@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
-//@ts-ignore
-import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { useCallback, useEffect, useState } from "react";
+import Particles, { ParticlesProvider } from "@tsparticles/react";
+import type { Engine } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 
 import "./styles.scss";
@@ -9,6 +9,9 @@ import Experience from "./components/experience";
 import Skills from "./components/skills";
 import particleOptions from "./components/particles";
 
+/**
+ * Smooth-scrolls to a section by element id.
+ */
 const scrollTo = (id: string) => {
   const element = document.getElementById(id);
   if (element) {
@@ -18,21 +21,16 @@ const scrollTo = (id: string) => {
 
 const pages = [
   {
-    button: () => <button onClick={() => scrollTo("about")}>About Me</button>,
     component: AboutMe,
     title: "About Me",
     id: "about",
   },
   {
-    button: () => (
-      <button onClick={() => scrollTo("experience")}>Experience</button>
-    ),
     component: Experience,
     title: "Work Experience",
     id: "experience",
   },
   {
-    button: () => <button onClick={() => scrollTo("skills")}>Skills</button>,
     component: Skills,
     title: "Skills",
     id: "skills",
@@ -40,14 +38,13 @@ const pages = [
 ];
 
 const App: React.FC = () => {
-  // State to track the active section
   const [activeSection, setActiveSection] = useState<string>("");
 
-  useEffect(() => {
-    initParticlesEngine(async (engine: any) => {
-      await loadSlim(engine);
-    });
+  const initParticles = useCallback(async (engine: Engine) => {
+    await loadSlim(engine);
+  }, []);
 
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -59,65 +56,45 @@ const App: React.FC = () => {
       { rootMargin: "0px", threshold: 0.5 }
     );
 
-    // Observe each section
     pages.forEach(({ id }) => {
       const section = document.getElementById(id);
       if (section) observer.observe(section);
     });
 
-    // Clean up observer on component unmount
     return () => observer.disconnect();
   }, []);
 
-  const options = useMemo(
-    () => ({
-      background: {
-        color: {
-          value: "#23263A",
-        },
-      },
-      fpsLimit: 100,
-      interactivity: particleOptions.interactivity,
-      particles: particleOptions.particles,
-      detectRetina: true,
-    }),
-    []
-  );
-
-  console.log({ activeSection });
-
   return (
-    <div className="App">
-      <Particles
-        id="tsparticles"
-        // @ts-ignore
-        options={options}
-      />
-      <div className="navigation">
-        {pages.map((page) => (
-          <button
-            onClick={() => {
-              setActiveSection(page.id);
-              scrollTo(page.id);
-            }}
-            className={activeSection === page.id ? "active" : ""}
-            key={page.id}
+    <ParticlesProvider init={initParticles}>
+      <div className="App">
+        <Particles id="tsparticles" options={particleOptions} />
+        <div className="navigation">
+          {pages.map((page) => (
+            <button
+              onClick={() => {
+                setActiveSection(page.id);
+                scrollTo(page.id);
+              }}
+              className={activeSection === page.id ? "active" : ""}
+              key={page.id}
+            >
+              {page.title}
+            </button>
+          ))}
+        </div>
+        {pages.map(({ component: Component, title, id }) => (
+          <div
+            key={id}
+            style={{ position: "relative", zIndex: 1, width: "100%" }}
+            className="section"
+            id={id}
+            aria-label={title}
           >
-            {page.title}
-          </button>
+            <Component />
+          </div>
         ))}
       </div>
-      {pages.map(({ component: Component, title, id }) => (
-        <div
-          key={id}
-          style={{ position: "relative", zIndex: 1, width: "100%" }}
-          className="section"
-          id={id}
-        >
-          <Component />
-        </div>
-      ))}
-    </div>
+    </ParticlesProvider>
   );
 };
 

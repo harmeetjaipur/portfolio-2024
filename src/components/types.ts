@@ -1,7 +1,9 @@
+import type { ReactNode } from "react";
+
 export interface TabbedProps {
   tabSize?: number;
-  children: React.ReactNode;
-  className?: string; 
+  children: ReactNode;
+  className?: string;
 }
 
 export interface WorkType {

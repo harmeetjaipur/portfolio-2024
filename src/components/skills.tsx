@@ -7,7 +7,7 @@ import {
   SiNodedotjs,
   SiGraphql,
   SiApollographql,
-  SiCss3,
+  SiCss,
   SiWebpack,
 } from "react-icons/si";
 import Tabbed from "./tabbed";
@@ -32,7 +32,7 @@ const skillsetData = [
   },
   {
     title: "CSS",
-    icon: <SiCss3 />,
+    icon: <SiCss />,
     description:
       "Styling and creating beautifully designed user interfaces with advanced CSS techniques including Flexbox and Grid.",
   },
