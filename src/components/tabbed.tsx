@@ -1,21 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-
-import { TabbedProps } from "./types";
-
-export const StyledTabbed = styled.section<TabbedProps>`
-  ${({ tabSize = 0 }) => `
-    padding-left: ${tabSize * 2}em;
-    overflow: auto;
-  `}
-`;
+import type { TabbedProps } from "./types";
 
 const Tabbed: React.FC<TabbedProps> = ({ children, className = "" }) => {
-  return (
-    <StyledTabbed className="tabbed-content" tabSize={1}>
-      {children}
-    </StyledTabbed>
-  );
+  return <section className={className || "tabbed-content"}>{children}</section>;
 };
 
 export default Tabbed;

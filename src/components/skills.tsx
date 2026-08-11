@@ -1,6 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import { FaReact, FaPuzzlePiece, FaUserFriends } from "react-icons/fa";
+import { HiSparkles } from "react-icons/hi2";
+import { RiRobot2Line } from "react-icons/ri";
 import {
   SiJavascript,
   SiRedux,
@@ -22,100 +23,84 @@ const skillsetData = [
     title: "JavaScript",
     icon: <SiJavascript />,
     description:
-      "Expertise in ES6+ syntax, asynchronous programming, and DOM manipulation.",
+      "ES6+ syntax, asynchronous programming, and DOM craftsmanship.",
+  },
+  {
+    title: "AI-assisted development",
+    icon: <RiRobot2Line />,
+    description:
+      "Shipping faster with Cursor and Copilot-style workflows, strong prompts, and careful review of AI output.",
+  },
+  {
+    title: "LLMs & prompts",
+    icon: <HiSparkles />,
+    description:
+      "Using large language models for coding, docs, and product experiments with clear, iterative prompting.",
   },
   {
     title: "Redux",
     icon: <SiRedux />,
     description:
-      "State management for JavaScript apps, ensuring predictable state through a centralized store.",
+      "Predictable state management through a centralized store.",
   },
   {
     title: "CSS",
     icon: <SiCss />,
     description:
-      "Styling and creating beautifully designed user interfaces with advanced CSS techniques including Flexbox and Grid.",
+      "Layout systems, Flexbox, Grid, and thoughtful visual polish.",
   },
   {
     title: "Node",
     icon: <SiNodedotjs />,
-    description:
-      "Maintaining and upgrading scalable services and RESTful APIs with Node.js.",
+    description: "Maintaining scalable services and RESTful APIs.",
   },
   {
     title: "GraphQL",
     icon: <SiGraphql />,
-    description:
-      "Designing and implementing APIs using GraphQL for more efficient and flexible data retrieval.",
+    description: "Flexible APIs for efficient data retrieval.",
   },
   {
     title: "Apollo",
     icon: <SiApollographql />,
-    description:
-      "Integrating Apollo Client and Server in applications to manage data with GraphQL.",
+    description: "Client and server data graphs with GraphQL.",
   },
   {
     title: "Microfrontend",
     icon: <FaPuzzlePiece />,
-    description:
-      "Implementing frontend apps using the mFE approach to break down monoliths into smaller, more manageable pieces.",
+    description: "Breaking monoliths into manageable frontend pieces.",
   },
   {
     title: "Webpack",
     icon: <SiWebpack />,
-    description:
-      "Automating asset bundling and optimization workflows to streamline development and production processes.",
+    description: "Asset bundling and production optimization workflows.",
   },
   {
     title: "Mentorship",
     icon: <FaUserFriends />,
     description:
-      "Guiding and empowering developers through knowledge sharing, code reviews, and personalized advice to enhance team skills and productivity.",
+      "Code reviews, pairing, and growing engineers on the team.",
   },
 ];
-
-const SkillContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-`;
-
-const SkillTile = styled.div`
-  width: 200px;
-  padding: 20px;
-  background-color: #2b2d41;
-  text-align: center;
-
-  h3 {
-    color: #ff4a57;
-    margin: 10px 0;
-  }
-
-  .icon {
-    color: #ff4a57;
-    font-size: 2rem;
-  }
-`;
-
-const StyledH1 = styled.h1`
-  text-align: center;
-  margin-bottom: 2rem;
-`;
 
 const Skills: React.FC = () => {
   return (
     <Tabbed className="tabbed-content" tabSize={1}>
-      <StyledH1 className="highlight-text">Skills</StyledH1>
-      <SkillContainer>
-        {skillsetData.map((skill) => (
-          <SkillTile key={skill.title}>
-            <div className="icon">{skill.icon}</div>
-            <h3>{skill.title}</h3>
-            <p>{skill.description}</p>
-          </SkillTile>
-        ))}
-      </SkillContainer>
+      <div className="skills-panel">
+        <h2 className="section-heading skills-panel__heading">
+          Skills
+        </h2>
+        <div className="skill-grid">
+          {skillsetData.map((skill) => (
+            <article className="skill-tile" key={skill.title}>
+              <div className="icon" aria-hidden="true">
+                {skill.icon}
+              </div>
+              <h3>{skill.title}</h3>
+              <p>{skill.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
     </Tabbed>
   );
 };

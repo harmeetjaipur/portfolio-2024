@@ -47,13 +47,15 @@ const App: React.FC = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible[0]) {
+          setActiveSection(visible[0].target.id);
+        }
       },
-      { rootMargin: "0px", threshold: 0.5 }
+      { rootMargin: "-20% 0px -45% 0px", threshold: [0.15, 0.35, 0.55, 0.75] }
     );
 
     pages.forEach(({ id }) => {
