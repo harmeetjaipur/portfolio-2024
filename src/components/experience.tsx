@@ -1,9 +1,11 @@
 import React from "react";
+import { useDeck } from "./deck";
 import Tabbed from "./tabbed";
 
 const roles = [
   {
     year: "Oct 2024 – present",
+    place: "Loblaw Digital",
     copy: (
       <>
         Sr Software Developer at{" "}
@@ -20,10 +22,12 @@ const roles = [
   },
   {
     year: "March 2024 – Oct 2024",
+    place: "Time off",
     copy: <>Took time off between roles.</>,
   },
   {
     year: "Jan 2020 – March 2024",
+    place: "Vena Solutions",
     copy: (
       <>
         Sr Software Developer at{" "}
@@ -40,6 +44,7 @@ const roles = [
   },
   {
     year: "Jan 2019 – Dec 2019",
+    place: "nobul",
     copy: (
       <>
         Full-stack developer at{" "}
@@ -52,11 +57,12 @@ const roles = [
   },
   {
     year: "Sept 2018 – Jan 2019",
+    place: "Northern Block",
     copy: (
       <>
         Joined{" "}
         <a
-          href="https://northernblock.ca/"
+          href="https://northernblock.io/"
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -68,6 +74,7 @@ const roles = [
   },
   {
     year: "2015 – 2018",
+    place: "Clausehound",
     copy: (
       <>
         Moved into full-time development at{" "}
@@ -84,6 +91,7 @@ const roles = [
   },
   {
     year: "2014",
+    place: "George Brown",
     copy: (
       <>
         Studied at{" "}
@@ -101,6 +109,7 @@ const roles = [
   },
   {
     year: "2012 – 2013",
+    place: "Veesys",
     copy: (
       <>
         Joined{" "}
@@ -113,6 +122,7 @@ const roles = [
   },
   {
     year: "2011",
+    place: "Doomshell",
     copy: (
       <>
         Started leaning into development at{" "}
@@ -129,6 +139,7 @@ const roles = [
   },
   {
     year: "2008 – 2010",
+    place: "A3logics",
     copy: (
       <>
         My first job in technology. Worked as a Graphics Designer at{" "}
@@ -141,7 +152,13 @@ const roles = [
   },
 ];
 
+export const logSize = roles.length;
+
+export const runStops = roles.map(({ year, place }) => ({ year, place }));
+
 const Experience: React.FC = () => {
+  const { dock, docked, visited } = useDeck();
+
   return (
     <Tabbed className="tabbed-content" tabSize={1}>
       <div className="work-experience">
@@ -159,12 +176,41 @@ const Experience: React.FC = () => {
           </p>
         </div>
         <div className="timeline">
-          {roles.map((role) => (
-            <article className="log-entry" key={role.year}>
-              <span className="timeline__year">{role.year}</span>
-              <p className="timeline__item">{role.copy}</p>
-            </article>
-          ))}
+          {roles.map((role) => {
+            const locked = docked === role.year;
+
+            return (
+              <article
+                className={
+                  locked
+                    ? "log-entry log-entry--seen log-entry--docked"
+                    : visited.includes(role.year)
+                      ? "log-entry log-entry--seen"
+                      : "log-entry"
+                }
+                data-year={role.year}
+                key={role.year}
+                onClick={(event) => {
+                  if ((event.target as HTMLElement).closest("a")) return;
+                  dock(role.year);
+                }}
+              >
+                {locked && <span className="log-scan" aria-hidden="true" />}
+                <button
+                  type="button"
+                  className="timeline__year"
+                  aria-pressed={locked}
+                  onClick={() => dock(role.year)}
+                >
+                  {role.year}
+                </button>
+                <p className="timeline__item">
+                  {locked && <span className="timeline__tx">Transmission</span>}
+                  {role.copy}
+                </p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </Tabbed>

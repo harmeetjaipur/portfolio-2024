@@ -1,11 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Particles, { ParticlesProvider } from "@tsparticles/react";
 import type { Engine } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 
 import "./styles.scss";
 import AboutMe from "./components/about-me";
+import { DeckProvider } from "./components/deck";
+import { LogConfetti } from "./components/field-confetti";
 import Experience from "./components/experience";
+import Hud from "./components/hud";
+import SignalRun from "./components/signal-run";
 import Skills from "./components/skills";
 import particleOptions from "./components/particles";
 
@@ -39,6 +43,10 @@ const pages = [
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("");
+  const [running, setRunning] = useState(false);
+  const markTaps = useRef<number[]>([]);
+  const openRun = useCallback(() => setRunning(true), []);
+  const closeRun = useCallback(() => setRunning(false), []);
 
   const initParticles = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
@@ -55,35 +63,44 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    const update = () => {
+      const mark = window.scrollY + window.innerHeight * 0.28;
+      let current = pages[0].id;
 
-        if (visible[0]) {
-          setActiveSection(visible[0].target.id);
-        }
-      },
-      { rootMargin: "-20% 0px -45% 0px", threshold: [0.15, 0.35, 0.55, 0.75] }
-    );
+      pages.forEach(({ id }) => {
+        const section = document.getElementById(id);
+        if (section && section.offsetTop <= mark) current = id;
+      });
 
-    pages.forEach(({ id }) => {
-      const section = document.getElementById(id);
-      if (section) observer.observe(section);
-    });
+      setActiveSection(current);
+    };
 
-    return () => observer.disconnect();
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
   return (
     <ParticlesProvider init={initParticles}>
+      <DeckProvider>
       <div className="App">
         <Particles id="tsparticles" options={particleOptions} />
         <header className="navigation">
           <button
             className="navigation__mark"
             onClick={() => {
+              const now = Date.now();
+              markTaps.current = markTaps.current.filter((time) => now - time < 1400);
+              markTaps.current.push(now);
+              if (markTaps.current.length >= 4) {
+                markTaps.current = [];
+                setRunning(true);
+                return;
+              }
               setActiveSection("about");
               scrollTo("about");
             }}
@@ -109,6 +126,17 @@ const App: React.FC = () => {
             ))}
           </nav>
         </header>
+        <Hud
+          activeSection={activeSection || "about"}
+          running={running}
+          onRun={openRun}
+          onJump={(id) => {
+            setActiveSection(id);
+            scrollTo(id);
+          }}
+        />
+        <LogConfetti />
+        {running && <SignalRun onClose={closeRun} />}
         {pages.map(({ component: Component, title, id }, index) => (
           <div
             key={id}
@@ -121,6 +149,7 @@ const App: React.FC = () => {
           </div>
         ))}
       </div>
+      </DeckProvider>
     </ParticlesProvider>
   );
 };
