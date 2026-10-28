@@ -17,68 +17,72 @@ const skillsetData = [
   {
     title: "React",
     icon: <FaReact />,
-    description: "Building user interfaces with component-based architecture.",
-  },
-  {
-    title: "JavaScript",
-    icon: <SiJavascript />,
     description:
-      "ES6+ syntax, asynchronous programming, and DOM craftsmanship.",
+      "Interfaces I have built with since 2015, component by component.",
+    lead: true,
   },
   {
     title: "AI-assisted development",
     icon: <RiRobot2Line />,
     description:
-      "Shipping faster with Cursor and Copilot-style workflows, strong prompts, and careful review of AI output.",
+      "Cursor and Copilot-style tools speed up the draft. I still review what ships.",
+    lead: true,
+  },
+  {
+    title: "Mentorship",
+    icon: <FaUserFriends />,
+    description: "Code reviews, pairing, and growing the engineers beside me.",
+    lead: true,
+  },
+  {
+    title: "JavaScript",
+    icon: <SiJavascript />,
+    description:
+      "The language under all of it: modern syntax, async work, and the DOM.",
   },
   {
     title: "LLMs & prompts",
     icon: <HiSparkles />,
     description:
-      "Using large language models for coding, docs, and product experiments with clear, iterative prompting.",
+      "Prompts for code, docs, and product experiments, rewritten until the result is clear.",
   },
   {
     title: "Redux",
     icon: <SiRedux />,
     description:
-      "Predictable state management through a centralized store.",
+      "Shared state for screens that more than one part of a product depends on.",
   },
   {
     title: "CSS",
     icon: <SiCss />,
     description:
-      "Layout systems, Flexbox, Grid, and thoughtful visual polish.",
+      "Layout, Flexbox, Grid, and the polish that makes a screen feel finished.",
   },
   {
     title: "Node",
     icon: <SiNodedotjs />,
-    description: "Maintaining scalable services and RESTful APIs.",
+    description: "Services and REST APIs kept running next to the interface.",
   },
   {
     title: "GraphQL",
     icon: <SiGraphql />,
-    description: "Flexible APIs for efficient data retrieval.",
+    description: "APIs shaped around the data a screen actually needs.",
   },
   {
     title: "Apollo",
     icon: <SiApollographql />,
-    description: "Client and server data graphs with GraphQL.",
+    description: "How I have wired those graphs into the client.",
   },
   {
     title: "Microfrontend",
     icon: <FaPuzzlePiece />,
-    description: "Breaking monoliths into manageable frontend pieces.",
+    description:
+      "Breaking a large frontend into pieces teams can ship on their own.",
   },
   {
     title: "Webpack",
     icon: <SiWebpack />,
-    description: "Asset bundling and production optimization workflows.",
-  },
-  {
-    title: "Mentorship",
-    icon: <FaUserFriends />,
-    description:
-      "Code reviews, pairing, and growing engineers on the team.",
+    description: "Production bundles when a project outgrows the defaults.",
   },
 ];
 
@@ -91,7 +95,10 @@ const Skills: React.FC = () => {
         </h2>
         <div className="skill-grid">
           {skillsetData.map((skill) => (
-            <article className="skill-tile" key={skill.title}>
+            <article
+              className={skill.lead ? "skill-tile skill-tile--lead" : "skill-tile"}
+              key={skill.title}
+            >
               <div className="icon" aria-hidden="true">
                 {skill.icon}
               </div>

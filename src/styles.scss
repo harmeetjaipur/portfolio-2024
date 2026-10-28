@@ -304,6 +304,16 @@ h5 {
   text-shadow: 0 0 42px rgba(106, 231, 255, 0.22);
 }
 
+.hero__contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.4rem;
+  margin: 1.6rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
 .hero__line {
   margin: 0;
   max-width: 28rem;
@@ -531,6 +541,19 @@ h5 {
     color: rgba(106, 231, 255, 0.7);
   }
 
+  &--lead {
+    border-color: rgba(214, 255, 62, 0.55);
+    background: linear-gradient(160deg, rgba(28, 36, 22, 0.96), rgba(10, 14, 18, 0.92));
+
+    h3 {
+      font-size: 1.15rem;
+    }
+
+    p {
+      color: var(--ink);
+    }
+  }
+
   &:hover {
     border-color: rgba(214, 255, 62, 0.7);
     background: linear-gradient(160deg, rgba(24, 32, 22, 0.95), rgba(8, 12, 18, 0.92));
@@ -610,6 +633,10 @@ h5 {
     grid-template-columns: 1fr 1fr;
   }
 
+  .skill-tile--lead:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
   .hero {
     grid-template-columns: 1fr;
     min-height: auto;
@@ -668,9 +695,10 @@ h5 {
     justify-content: center;
     writing-mode: horizontal-tb;
     text-align: center;
-    padding: 0.35rem 0.2rem;
-    font-size: 0.58rem;
-    letter-spacing: 0.04em;
+    padding: 0.5rem 0.25rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    line-height: 1.25;
     white-space: normal;
   }
 
@@ -710,6 +738,11 @@ h5 {
 @media (max-width: 640px) {
   .skill-grid {
     grid-template-columns: 1fr;
+  }
+
+  .skill-tile p {
+    font-size: 0.95rem;
+    line-height: 1.45;
   }
 }
 

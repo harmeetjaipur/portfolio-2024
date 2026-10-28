@@ -9,28 +9,45 @@ const AboutMe: React.FC = () => {
         <div className="hero__copy">
           <p className="hero__eyebrow">
             <span className="pulse" aria-hidden="true" />
-            Frontend developer · Toronto
+            Sr Software Developer · Loblaw Digital
           </p>
           <h1 className="hero__name">
             <span className="hero__given">Harmeet</span>
             <span className="hero__family">Singh</span>
           </h1>
           <p className="hero__line">
-            JavaScript engineer building clear, resilient interfaces — from
+            JavaScript engineer building clear, resilient interfaces, from
             Jaipur to Toronto.
           </p>
+          <p className="hero__contact">
+            <a href="mailto:hello@findharmeet.ca">hello@findharmeet.ca</a>
+            <a
+              href="https://github.com/harmeetjaipur"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/harmeet-singh-dev/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              LinkedIn
+            </a>
+          </p>
         </div>
-        <div className="hero__visual" aria-hidden="true">
-          <div className="hero__orbit" />
-          <div className="hero__orbit-inner" />
-          <div className="hero__ticks">
+        <div className="hero__visual">
+          <div className="hero__orbit" aria-hidden="true" />
+          <div className="hero__orbit-inner" aria-hidden="true" />
+          <div className="hero__ticks" aria-hidden="true">
             <span />
             <span />
             <span />
             <span />
           </div>
           <div className="hero__plate">
-            <img src={backgroundImage} alt="" />
+            <img src={backgroundImage} alt="Harmeet Singh" />
           </div>
         </div>
       </section>
