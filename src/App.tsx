@@ -45,6 +45,16 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    const onMove = (event: PointerEvent) => {
+      document.documentElement.style.setProperty("--mx", `${event.clientX}px`);
+      document.documentElement.style.setProperty("--my", `${event.clientY}px`);
+    };
+
+    window.addEventListener("pointermove", onMove);
+    return () => window.removeEventListener("pointermove", onMove);
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -70,27 +80,42 @@ const App: React.FC = () => {
     <ParticlesProvider init={initParticles}>
       <div className="App">
         <Particles id="tsparticles" options={particleOptions} />
-        <div className="navigation">
-          {pages.map((page) => (
-            <button
-              onClick={() => {
-                setActiveSection(page.id);
-                scrollTo(page.id);
-              }}
-              className={activeSection === page.id ? "active" : ""}
-              key={page.id}
-            >
-              {page.title}
-            </button>
-          ))}
-        </div>
-        {pages.map(({ component: Component, title, id }) => (
+        <header className="navigation">
+          <button
+            className="navigation__mark"
+            onClick={() => {
+              setActiveSection("about");
+              scrollTo("about");
+            }}
+          >
+            HS
+          </button>
+          <nav className="navigation__links" aria-label="Sections">
+            {pages.map((page, index) => (
+              <button
+                onClick={() => {
+                  setActiveSection(page.id);
+                  scrollTo(page.id);
+                }}
+                className={activeSection === page.id ? "active" : ""}
+                aria-current={activeSection === page.id ? "true" : undefined}
+                key={page.id}
+              >
+                <span className="navigation__index">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                {page.title}
+              </button>
+            ))}
+          </nav>
+        </header>
+        {pages.map(({ component: Component, title, id }, index) => (
           <div
             key={id}
-            style={{ position: "relative", zIndex: 1, width: "100%" }}
             className="section"
             id={id}
             aria-label={title}
+            data-index={String(index + 1).padStart(2, "0")}
           >
             <Component />
           </div>

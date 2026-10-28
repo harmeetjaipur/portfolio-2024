@@ -140,10 +140,10 @@ const Experience: React.FC = () => {
         </div>
         <div className="timeline">
           {roles.map((role) => (
-            <p className="timeline__item" key={role.year}>
+            <article className="log-entry" key={role.year}>
               <span className="timeline__year">{role.year}</span>
-              {role.copy}
-            </p>
+              <p className="timeline__item">{role.copy}</p>
+            </article>
           ))}
         </div>
       </div>

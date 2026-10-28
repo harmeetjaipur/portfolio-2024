@@ -14,39 +14,35 @@ const particleOptions: ISourceOptions = {
   detectRetina: true,
   particles: {
     number: {
-      value: 70,
+      value: 42,
       density: {
         enable: true,
-        width: 1400,
+        width: 1600,
       },
     },
     color: {
-      value: ["#e8e6e1", "#e8a87c"],
+      value: ["#d6ff3e", "#6ae7ff"],
     },
     shape: {
-      type: "circle",
+      type: "square",
     },
     opacity: {
-      value: { min: 0.15, max: 0.45 },
+      value: { min: 0.2, max: 0.7 },
       animation: {
         enable: true,
-        speed: 0.6,
+        speed: 0.4,
         sync: false,
       },
     },
     size: {
-      value: { min: 1, max: 2.4 },
+      value: { min: 1, max: 2.2 },
     },
     links: {
-      enable: true,
-      distance: 120,
-      color: "#e8e6e1",
-      opacity: 0.12,
-      width: 0.6,
+      enable: false,
     },
     move: {
       enable: true,
-      speed: 0.8,
+      speed: 0.35,
       direction: "none",
       random: true,
       straight: false,
