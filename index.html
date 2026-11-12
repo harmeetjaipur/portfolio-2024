@@ -7,15 +7,18 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="theme-color" content="#06070d" />
+    <meta name="theme-color" content="#f6f1ea" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14110f" media="(prefers-color-scheme: dark)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta
       name="description"
-      content="Harmeet Singh is a JavaScript engineer in Toronto and a Sr Software Developer at Loblaw Digital."
+      content="Harmeet Singh is a JavaScript engineer in Toronto and a Sr Developer (eComm) at Loblaw Digital who builds with AI every day."
     />
     <meta property="og:title" content="Harmeet Singh" />
     <meta
       property="og:description"
-      content="JavaScript engineer in Toronto. Sr Software Developer at Loblaw Digital, building customer-facing web experiences."
+      content="JavaScript engineer in Toronto and Sr Developer (eComm) at Loblaw Digital. Builds with AI every day, and builds the tools around it."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://findharmeet.ca/" />
@@ -24,11 +27,17 @@
     <meta name="twitter:title" content="Harmeet Singh" />
     <meta
       name="twitter:description"
-      content="JavaScript engineer in Toronto. Sr Software Developer at Loblaw Digital, building customer-facing web experiences."
+      content="JavaScript engineer in Toronto and Sr Developer (eComm) at Loblaw Digital. Builds with AI every day, and builds the tools around it."
     />
     <meta name="twitter:image" content="https://findharmeet.ca/og.jpg" />
     <link rel="manifest" href="/manifest.json" />
-    <title>Harmeet Singh, Sr Software Developer</title>
+    <script>
+      try {
+        var t = localStorage.getItem("patang:theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+    <title>Harmeet Singh, Sr Developer at Loblaw Digital</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
