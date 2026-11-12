@@ -1,6 +1,6 @@
 {
   "short_name": "Harmeet Singh",
-  "name": "Harmeet Singh, Sr Software Developer",
+  "name": "Harmeet Singh, Sr Developer at Loblaw Digital",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#06070d",
-  "background_color": "#06070d"
+  "theme_color": "#f6f1ea",
+  "background_color": "#f6f1ea"
 }
